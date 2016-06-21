@@ -1,0 +1,13 @@
+<ul class="centered rich-list">
+    <li ng-repeat="project in $storage.projects">
+        <a ng-href="#!/project/{{project.name | escape}}" class="project">
+            <div ng-show="project.icon" class="project-icon">
+                <img ng-src="data:{{project.icon.mime}};base64,{{project.icon.data}}"/>
+            </div>
+            <div class="project-name">{{project.name}}</div>
+        </a>
+        <div class="rich-list-item-delete" ng-click="deleteProject(project)"><i class="fa fa-times"></i></div>
+    </li>
+</ul>
+
+<button ng-click="createProject()">New Project</button>

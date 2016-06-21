@@ -1,8 +1,86 @@
+@highlight-color: #eea540;
+
+*:not(input) {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #eee9e2;
+}
+
 .browse-happy {
   background: white;
   border: 3px solid red;
   margin: 5px;
   padding: 5px;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.centered {
+  display: block;
+  margin: 0 auto;
+}
+
+.rich-list {
+  list-style-type: none;
+  width: 650px;
+
+  li {
+    background-color: white;
+    box-shadow: 1px 1px 3px black;
+    display: block;
+    height: 80px;
+    margin-bottom: 10px;
+    position: relative;
+
+    &:before {
+      border-left: 15px solid transparent;
+      content: "";
+      float: left;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &:hover:before {
+      border-left: 15px solid @highlight-color;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  .rich-list-item-delete {
+    bottom: 0;
+    color: silver;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 25px;
+
+    &:hover {
+      background-color: red;
+      color: white;
+    }
+  }
+}
+
+.project {
+  display: block;
+  height: 50px;
+  padding: 15px 25px;
+
+  .project-name {
+    font-size: 1.4em;
+  }
 }
 
 .menu {
