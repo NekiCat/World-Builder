@@ -22,13 +22,13 @@
   "scripts": {
     "postinstall": "bower install && typings install",
 
-    "build-js": "foreach -g \"app/{app.ts,!(components)/**/*.ts}\" -x \"tsc #{path}\" && concat-glob-cli -f \"app/{app.js,!(components)/**/*.js}\" -o app/app.tmp.js && minify app/app.tmp.js -o app/app.min.js",
+    "build-js": "cd app && dir *.ts /b /s > ts-files.txt && cd .. && tsc @app/ts-files.txt && trash app/ts-files.txt && concat-glob-cli -f \"app/{app.js,!(components)/**/*.js}\" -o app/app.tmp.js && minify app/app.tmp.js -o app/app.min.js",
     "build-css": "lessc app/app.less app/app.tmp.css && minify app/app.tmp.css -o app/app.min.css",
     "build": "npm run build-js && npm run build-css",
     "prebuild": "npm run clean",
     "postbuild": "trash \"app/{!(components)/**/*.{js,css},!(*min).{js,css}}\"",
 
-    "clean": "trash \"app/{!(components)/**/,}*.{js,css}\"",
+    "clean": "trash \"app/{!(components)/**/,}*.{js,css}\" && trash app/ts-files.txt",
 
     "pretest": "npm run build",
     "test": "",
