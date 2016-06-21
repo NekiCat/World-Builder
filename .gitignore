@@ -1,0 +1,11 @@
+logs/*
+!.gitkeep
+node_modules/
+typings/
+/app/components/
+tmp
+.DS_Store
+.idea
+*.css
+*.js
+*.log

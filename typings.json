@@ -1,0 +1,9 @@
+{
+  "name": "world-builder",
+  "dependencies": {},
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20160619025852",
+    "angular-route": "registry:dt/angular-route#1.3.0+20160317120654",
+    "jquery": "registry:dt/jquery#1.10.0+20160620094458"
+  }
+}
