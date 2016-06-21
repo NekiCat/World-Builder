@@ -1,4 +1,4 @@
-/// <reference path="../../typings/index.d.ts"/>
+/// <reference path="../../../typings/index.d.ts"/>
 module WorldBuilder {
     export interface View2Scope extends ng.IScope {
     }
@@ -13,7 +13,7 @@ module WorldBuilder {
     angular.module("WorldBuilder")
         .config(["$routeProvider", ($routeProvider: ng.route.IRouteProvider) => {
             $routeProvider.when("/view2", {
-                templateUrl: "view2/view2.html",
+                templateUrl: "views/view2/view2.html",
                 controller: "View2Controller"
             });
         }])
