@@ -23,16 +23,19 @@ module WorldBuilder {
         }
 
         public createProject() {
+            let project = new Project();
+            project.name = "New Project";
+
             if (this.$scope.$storage.projects.filter((p) => p.name.toLowerCase() === "new project").length) {
                 var num = 1;
                 //noinspection JSReferencingMutableVariableFromClosure
                 while (this.$scope.$storage.projects.filter((p) => p.name.toLowerCase() === "new project (" + num.toString() + ")").length) {
                     num++;
                 }
-                this.$scope.$storage.projects.push(new Project("New Project (" + num.toString() + ")"));
-            } else {
-                this.$scope.$storage.projects.push(new Project("New Project"));
+                project.name += " (" + num.toString() + ")";
             }
+
+            this.$scope.$storage.projects.push(project);
         }
 
         public deleteProject(project: Project) {

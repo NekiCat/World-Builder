@@ -1,0 +1,8 @@
+<ul class="menu">
+    <li><a href="#!/projects"><i class="fa fa-bars"></i> Projects</a></li>
+    <li ng-show="$parent.project"><a href="#!/projects/{{$parent.project.guid | escape}}"><i class="fa fa-pencil-square-o"></i> {{$parent.project.name}}</a></li>
+    <li ng-show="$parent.project"><a href="#!/projects/{{$parent.project.guid | escape}}/characters"><i class="fa fa-users"></i> Characters</a></li>
+    <li ng-show="$parent.project"><a href="#!/projects/{{$parent.project.guid | escape}}/locations"><i class="fa fa-picture-o"></i> Locations</a></li>
+    <li ng-show="$parent.project"><a href="#!/projects/{{$parent.project.guid | escape}}/events"><i class="fa fa-paper-plane"></i> Events</a></li>
+    <li ng-show="$parent.project"><a href="#!/projects/{{$parent.project.guid | escape}}/glossary"><i class="fa fa-hdd-o"></i> Glossary</a></li>
+</ul>

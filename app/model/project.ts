@@ -4,11 +4,9 @@ module WorldBuilder {
         data: string;
     }
 
-    export class Project {
+    export class Project implements Identifiable, Nameable {
+        guid: string = GUID.create();
+        name: string = "New Project";
         icon: Icon;
-
-        constructor(public name: string) {
-
-        }
     }
 }

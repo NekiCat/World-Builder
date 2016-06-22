@@ -26,7 +26,7 @@ module WorldBuilder {
                 projects: []
             });
 
-            this.$scope.project = this.$scope.$storage.projects.filter((p) => p.name === $routeParams.project)[0];
+            this.$scope.project = this.$scope.$storage.projects.filter((p) => p.guid === $routeParams.project)[0];
         }
     }
 

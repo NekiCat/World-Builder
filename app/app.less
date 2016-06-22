@@ -1,12 +1,13 @@
-@highlight-color: #eea540;
+@highlight-color: #f39c12;
+@menu-color: #2c3e50;
 
-*:not(input) {
+*:not(input):not(button) {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: #eee9e2;
+  background-color: #ecf0f1;
 }
 
 .browse-happy {
@@ -22,8 +23,39 @@ body {
 }
 
 .centered {
-  display: block;
   margin: 0 auto;
+}
+
+.box {
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  display: block;
+  overflow: hidden;
+}
+
+.menu {
+  background-color: @menu-color;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  line-height: 50px;
+  list-style-type: none;
+  margin-bottom: 30px;
+  user-select: none;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    color: white;
+    display: inline-block;
+    padding: 0 20px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: darken(@menu-color, 5%);
+    }
+  }
 }
 
 .rich-list {
@@ -31,12 +63,11 @@ body {
   width: 650px;
 
   li {
-    background-color: white;
-    box-shadow: 1px 1px 3px black;
-    display: block;
     height: 80px;
     margin-bottom: 10px;
     position: relative;
+
+    .box;
 
     &:before {
       border-left: 15px solid transparent;
@@ -81,33 +112,4 @@ body {
   .project-name {
     font-size: 1.4em;
   }
-}
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
 }
