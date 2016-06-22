@@ -46,6 +46,34 @@ body {
   }
 }
 
+.editable {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2em;
+
+  .editable-label {
+    border: 1px solid transparent;
+    font: inherit;
+    padding: 0 1px;
+    margin: 0;
+
+    &:hover:after {
+      color: silver;
+      content: "\f040";
+      font-family: 'FontAwesome';
+      margin-left: .5em;
+    }
+  }
+
+  .editable-input {
+    border: 1px solid silver;
+    border-radius: 3px;
+    font: inherit;
+    padding: 0 1px;
+    margin: 0;
+  }
+}
+
 .menu {
   background-color: @menu-color;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
@@ -68,6 +96,11 @@ body {
       background-color: darken(@menu-color, 5%);
     }
   }
+}
+
+.header-bar {
+  font-family: sans-serif;
+  padding: 0 20px;
 }
 
 .rich-list {

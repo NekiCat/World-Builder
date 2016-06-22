@@ -1,6 +1,11 @@
 <div ng-include="'menu.html'"></div>
 
-<div>Project page for {{project.name}}</div>
+<div class="header-bar">
+    <div class="editable" wb-click-off="editing = false">
+        <h1 class="editable-label" ng-show="!editing" ng-click="editing = true">{{project.name}}</h1>
+        <input type="text" class="editable-input" ng-model="project.name" ng-show="editing"/>
+    </div>
+</div>
 
 <div class="box-container">
     <div class="box" style="height: 230px;"></div>
