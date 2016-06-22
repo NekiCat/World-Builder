@@ -9,21 +9,18 @@ module WorldBuilder {
         name: string;
     }
 
-    export class GUID {
-        private constructor() { }
 
-        /**
-         * Creates a random GUID as identification for this project.
-         *
-         * @returns {string}
-         */
-        public static create(): string {
-            // http://stackoverflow.com/a/2117523/2346327
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                return v.toString(16);
-            });
-        }
+    /**
+     * Creates a random GUID as identification for this project.
+     *
+     * @returns {string}
+     */
+    export function createGUID(): string {
+        // http://stackoverflow.com/a/2117523/2346327
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
     }
 
     /**
