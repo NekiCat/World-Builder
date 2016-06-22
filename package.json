@@ -9,7 +9,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "bower": "latest",
     "http-server": "latest",
     "typescript": "latest",
     "typings": "latest",
@@ -20,7 +19,7 @@
     "trash-cli": "latest"
   },
   "scripts": {
-    "postinstall": "bower install && typings install",
+    "postinstall": "typings install",
 
     "build-js": "cd app && dir *.ts /b /s > ts-files.txt && cd .. && tsc @app/ts-files.txt --target ES5 && trash app/ts-files.txt && concat-glob-cli -f \"app/{app.js,!(components)/**/*.js}\" -o app/app.tmp.js && minify app/app.tmp.js -o app/app.min.js",
     "build-css": "lessc app/app.less app/app.tmp.css && minify app/app.tmp.css -o app/app.min.css",
