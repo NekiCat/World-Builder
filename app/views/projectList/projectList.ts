@@ -38,7 +38,9 @@ module WorldBuilder {
         public deleteProject(project: Project) {
             var pos = this.$scope.$storage.projects.indexOf(project);
             if (pos >= 0) {
-                this.$scope.$storage.projects.splice(pos, 1);
+                if (confirm("Do you really want to delete the whole project '" + this.$scope.$storage.projects[pos].name + "'? This cannot be undone!")) {
+                    this.$scope.$storage.projects.splice(pos, 1);
+                }
             }
         }
     }
