@@ -1,6 +1,6 @@
 <ul class="centered rich-list">
     <li ng-repeat="project in $storage.projects">
-        <a ng-href="#!/project/{{project.name | escape}}" class="project">
+        <a ng-href="#!/projects/{{project.name | escape}}" class="project">
             <div ng-show="project.icon" class="project-icon">
                 <img ng-src="data:{{project.icon.mime}};base64,{{project.icon.data}}"/>
             </div>

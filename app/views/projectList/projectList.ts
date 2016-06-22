@@ -1,15 +1,6 @@
 /// <reference path="../../../typings/index.d.ts"/>
 module WorldBuilder {
     /**
-     * Interface for the scope of a ProjectController.
-     */
-    export interface ProjectsScope extends ng.IScope {
-        $storage: ProjectStorage;
-        createProject: () => void;
-        deleteProject: (project: Project) => void;
-    }
-
-    /**
      * Interface for the project storage.
      */
     export interface ProjectStorage extends ng.storage.IStorageService {
@@ -19,10 +10,10 @@ module WorldBuilder {
     /**
      * Controller for the projects overview.
      */
-    export class ProjectsController {
+    export class ProjectListController {
         static $inject = ["$scope", "$localStorage"];
 
-        constructor(private $scope: ProjectsScope, $localStorage: ng.storage.IStorageService) {
+        constructor(private $scope: ProjectListScope, $localStorage: ng.storage.IStorageService) {
             this.$scope.$storage = <ProjectStorage>$localStorage.$default({
                 projects: []
             });
@@ -54,10 +45,10 @@ module WorldBuilder {
 
     angular.module("WorldBuilder")
         .config(["$routeProvider", ($routeProvider: ng.route.IRouteProvider) => {
-            $routeProvider.when("/", {
-                templateUrl: "views/projects/projects.html",
-                controller: "ProjectsController"
+            $routeProvider.when("/projects", {
+                templateUrl: "views/projectList/projectList.html",
+                controller: "ProjectListController"
             });
         }])
-        .controller("ProjectsController", ProjectsController);
+        .controller("ProjectListController", ProjectListController);
 }
