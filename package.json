@@ -33,7 +33,6 @@
     "pretest": "npm run build",
     "test": "",
 
-    "prestart": "npm run build",
     "start": "http-server app"
   }
 }
