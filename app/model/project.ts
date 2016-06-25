@@ -5,7 +5,7 @@ module WorldBuilder {
     }
 
     export class Project implements Identifiable, Nameable {
-        guid: string = createGUID();
+        guid: string = Util.createGUID();
         name: string = "New Project";
         icon: Icon;
         characters: Character[] = [];
