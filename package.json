@@ -12,16 +12,14 @@
     "http-server": "latest",
     "typescript": "latest",
     "typings": "latest",
-    "foreach-cli": "latest",
     "less": "latest",
     "minifier": "latest",
-    "concat-glob-cli": "latest",
     "trash-cli": "latest"
   },
   "scripts": {
     "postinstall": "typings install",
 
-    "build-js": "cd app && dir *.ts /b /s > ts-files.txt && cd .. && tsc @app/ts-files.txt --target ES5 && trash app/ts-files.txt && concat-glob-cli -f \"app/{app.js,!(components)/**/*.js}\" -o app/app.tmp.js && minify app/app.tmp.js -o app/app.min.js",
+    "build-js": "cd app && dir *.ts /b /s > ts-files.txt && cd .. && tsc @app/ts-files.txt --target ES5 --out app/app.tmp.js && trash app/ts-files.txt && minify app/app.tmp.js -o app/app.min.js",
     "build-css": "lessc app/app.less app/app.tmp.css && minify app/app.tmp.css -o app/app.min.css",
     "build": "npm run build-js && npm run build-css",
     "prebuild": "npm run clean",
