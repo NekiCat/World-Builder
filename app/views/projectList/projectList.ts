@@ -1,10 +1,12 @@
 /// <reference path="../../../typings/index.d.ts"/>
 module WorldBuilder {
     /**
-     * Interface for the project storage.
+     * Interface for the scope of a ProjectController.
      */
-    export interface ProjectStorage extends ng.storage.IStorageService {
-        projects: Project[];
+    export interface ProjectListScope extends ng.IScope {
+        $storage: ProjectStorage;
+        createProject: () => void;
+        deleteProject: (project: Project) => void;
     }
 
     /**
@@ -14,28 +16,13 @@ module WorldBuilder {
         static $inject = ["$scope", "$localStorage"];
 
         constructor(private $scope: ProjectListScope, $localStorage: ng.storage.IStorageService) {
-            this.$scope.$storage = <ProjectStorage>$localStorage.$default({
-                projects: []
-            });
-
+            this.$scope.$storage = <ProjectStorage>$localStorage.$default({ projects: [] });
             this.$scope.createProject = () => this.createProject.call(this);
             this.$scope.deleteProject = (p) => this.deleteProject.call(this, p);
         }
 
         public createProject() {
-            let project = new Project();
-            project.name = "New Project";
-
-            if (this.$scope.$storage.projects.filter((p) => p.name.toLowerCase() === "new project").length) {
-                var num = 1;
-                //noinspection JSReferencingMutableVariableFromClosure
-                while (this.$scope.$storage.projects.filter((p) => p.name.toLowerCase() === "new project (" + num.toString() + ")").length) {
-                    num++;
-                }
-                project.name += " (" + num.toString() + ")";
-            }
-
-            this.$scope.$storage.projects.push(project);
+            Util.insertNameable(this.$scope.$storage.projects, Project);
         }
 
         public deleteProject(project: Project) {
@@ -43,12 +30,6 @@ module WorldBuilder {
         }
     }
 
-    angular.module("WorldBuilder")
-        .config(["$routeProvider", ($routeProvider: ng.route.IRouteProvider) => {
-            $routeProvider.when("/projects", {
-                templateUrl: "views/projectList/projectList.html",
-                controller: "ProjectListController"
-            });
-        }])
-        .controller("ProjectListController", ProjectListController);
+    Util.registerAngularController("ProjectListController", ProjectListController,
+        "/projects", "views/projectList/projectList.html");
 }

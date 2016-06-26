@@ -12,23 +12,17 @@ module WorldBuilder {
      * Controller for the location overview.
      */
     export class LocationListController {
-        static $inject = ["$scope", "$localStorage", "$routeParams"];
+        static $inject = ["$scope", "$localStorage", "$routeParams", "$location"];
 
-        constructor(private $scope: LocationListScope, $localStorage: ng.storage.IStorageService, $routeParams: ProjectRouteParams) {
-            this.$scope.$storage = <ProjectStorage>$localStorage.$default({
-                projects: []
-            });
-
+        constructor(private $scope: LocationListScope, $localStorage: ng.storage.IStorageService, $routeParams: ProjectRouteParams, $location: ng.ILocationService) {
+            this.$scope.$storage = <ProjectStorage>$localStorage.$default({ projects: [] });
             this.$scope.project = this.$scope.$storage.projects.filter((p) => p.guid === $routeParams.project)[0];
+            if (!this.$scope.project) {
+                $location.path("/projects");
+            }
         }
     }
 
-    angular.module("WorldBuilder")
-        .config(["$routeProvider", ($routeProvider: ng.route.IRouteProvider) => {
-            $routeProvider.when("/projects/:project/locations", {
-                templateUrl: "views/locationList/locationList.html",
-                controller: "LocationListController"
-            });
-        }])
-        .controller("LocationListController", LocationListController);
+    Util.registerAngularController("LocationListController", LocationListController,
+        "/projects/:project/locations", "views/locationList/locationList.html");
 }

@@ -21,8 +21,35 @@ module WorldBuilder {
         name: string;
     }
 
+    export interface ProjectStorage extends ng.storage.IStorageService {
+        projects: Project[];
+    }
+
     export module Util {
-        export function removeConfirmed(list: Array<any>, item: Nameable, query: string) {
+        export function registerAngularController(controllerName: string, controller: any, route: string, templateUrl: string) {
+            angular.module("WorldBuilder")
+                .config(["$routeProvider", ($routeProvider: ng.route.IRouteProvider) => {
+                    $routeProvider.when(route, {
+                        templateUrl: templateUrl,
+                        controller: controllerName
+                    });
+                }])
+                .controller(controllerName, controller);
+        }
+
+        export function insertNameable(list: Array<Nameable>, ctr: new() => Nameable) {
+            let item = new ctr();
+            let num = 0;
+            let name = item.name;
+            while (list.filter(i => i.name.toLowerCase() == name.toLowerCase()).length > 0) {
+                name = item.name + " (" + (++num) + ")";
+            }
+
+            item.name = name;
+            list.push(item);
+        }
+
+        export function removeConfirmed(list: Array<Nameable>, item: Nameable, query: string) {
             let index = list.indexOf(item);
             if (index > -1 && confirm(query.replace("{0}", item.name))) {
                 list = list.splice(index, 1);
@@ -41,15 +68,6 @@ module WorldBuilder {
                 return v.toString(16);
             });
         }
-    }
-
-    /**
-     * Interface for the scope of a ProjectController.
-     */
-    export interface ProjectListScope extends ng.IScope {
-        $storage: ProjectStorage;
-        createProject: () => void;
-        deleteProject: (project: Project) => void;
     }
 
     angular.module("WorldBuilder", ["ngRoute", "ngStorage"])
