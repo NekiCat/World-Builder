@@ -1,0 +1,10 @@
+<div ng-include="'menu.html'"></div>
+
+<div class="header-bar">
+    <div class="editable" wb-click-off="editing = false">
+        <h1 class="editable-label" ng-show="!editing" ng-click="editing = true">{{character.name}}</h1>
+        <input type="text" class="editable-input" ng-model="character.name" ng-show="editing" wb-enter="editing = false"/>
+    </div>
+</div>
+
+<div>Character page for {{character.name}}</div>
