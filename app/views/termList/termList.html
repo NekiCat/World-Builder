@@ -1,3 +1,21 @@
 <div ng-include="'menu.html'"></div>
 
-<div>Glossary page for {{project.name}}</div>
+<ul class="centered rich-list">
+    <li ng-repeat="term in project.terms">
+        <div ng-show="!term.deleted">
+            <a ng-href="#!/projects/{{project.guid | escape}}/terms/{{location.guid | escape}}" class="rich-list-item term">
+                <div ng-show="term.icon" class="term-icon">
+                    <img ng-src="data:{{term.icon.mime}};base64,{{term.icon.data}}"/>
+                </div>
+                <div class="rich-list-item-label term-name">{{term.name}}</div>
+            </a>
+            <div class="rich-list-item-delete" ng-click="removeItem(term)"><i class="fa fa-times"></i></div>
+        </div>
+
+        <div ng-show="term.deleted" class="rich-list-item-removed">
+            {{term.name}} was deleted. <a href="javascript:void(0)" ng-click="removeUndo(term)">Undo?</a>
+        </div>
+    </li>
+</ul>
+
+<button ng-click="createItem()" class="centered rich-button-add"></button>
