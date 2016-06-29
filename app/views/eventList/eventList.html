@@ -1,3 +1,21 @@
 <div ng-include="'menu.html'"></div>
 
-<div>Event list page for {{project.name}}</div>
+<ul class="centered rich-list">
+    <li ng-repeat="event in project.events">
+        <div ng-show="!event.deleted">
+            <a ng-href="#!/projects/{{project.guid | escape}}/events/{{event.guid | escape}}" class="rich-list-item event">
+                <div ng-show="event.icon" class="event-icon">
+                    <img ng-src="data:{{event.icon.mime}};base64,{{event.icon.data}}"/>
+                </div>
+                <div class="rich-list-item-label event-name">{{event.name}}</div>
+            </a>
+            <div class="rich-list-item-delete" ng-click="removeItem(event)"><i class="fa fa-times"></i></div>
+        </div>
+
+        <div ng-show="event.deleted" class="rich-list-item-removed">
+            {{event.name}} was deleted. <a href="javascript:void(0)" ng-click="removeUndo(event)">Undo?</a>
+        </div>
+    </li>
+</ul>
+
+<button ng-click="createItem()" class="centered rich-button-add"></button>
