@@ -21,6 +21,10 @@ module WorldBuilder {
         name: string;
     }
 
+    export interface Deletable {
+        deleted: boolean;
+    }
+
     export interface ProjectStorage extends ng.storage.IStorageService {
         projects: Project[];
     }
@@ -52,7 +56,7 @@ module WorldBuilder {
         export function removeConfirmed(list: Array<Nameable>, item: Nameable, query: string) {
             let index = list.indexOf(item);
             if (index > -1 && confirm(query.replace("{0}", item.name))) {
-                list = list.splice(index, 1);
+                list.splice(index, 1);
             }
         }
 

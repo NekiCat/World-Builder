@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/index.d.ts"/>
 module WorldBuilder {
+    import IAngularEvent = angular.IAngularEvent;
     /**
      * Interface for the scope of a CharacterListController.
      */
@@ -8,6 +9,7 @@ module WorldBuilder {
         project: Project;
         createCharacter: () => void;
         deleteCharacter: (character: Character) => void;
+        deleteCharacterUndo: (character: Character) => void;
     }
 
     /**
@@ -24,7 +26,12 @@ module WorldBuilder {
             }
 
             this.$scope.createCharacter = () => Util.insertNameable(this.$scope.project.characters, Character);
-            this.$scope.deleteCharacter = (c) => Util.removeConfirmed(this.$scope.project.characters, c, "Are you sure you want to delete the character '{0}'? This cannot be undone!");
+            this.$scope.deleteCharacter = (c) => Util.removeStart(this.$scope.project.characters, c);
+            this.$scope.deleteCharacterUndo = (c) => Util.removeUndo(this.$scope.project.characters, c);
+            this.$scope.$on('$locationChangeSuccess', (e: IAngularEvent) => {
+                Util.removeEnd($scope.project.characters);
+                $localStorage.$apply();
+            });
         }
     }
 

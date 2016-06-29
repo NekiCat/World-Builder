@@ -2,13 +2,19 @@
 
 <ul class="centered rich-list">
     <li ng-repeat="character in project.characters">
-        <a ng-href="#!/projects/{{project.guid | escape}}/characters/{{character.guid | escape}}" class="character">
-            <div ng-show="character.icon" class="character-icon">
-                <img ng-src="data:{{character.icon.mime}};base64,{{character.icon.data}}"/>
-            </div>
-            <div class="character-name">{{character.name}}</div>
-        </a>
-        <div class="rich-list-item-delete" ng-click="deleteCharacter(character)"><i class="fa fa-times"></i></div>
+        <div ng-show="!character.deleted">
+            <a ng-href="#!/projects/{{project.guid | escape}}/characters/{{character.guid | escape}}" class="character">
+                <div ng-show="character.icon" class="character-icon">
+                    <img ng-src="data:{{character.icon.mime}};base64,{{character.icon.data}}"/>
+                </div>
+                <div class="character-name">{{character.name}}</div>
+            </a>
+            <div class="rich-list-item-delete" ng-click="deleteCharacter(character)"><i class="fa fa-times"></i></div>
+        </div>
+
+        <div ng-show="character.deleted">
+            {{character.name}} was deleted. <a href="javascript:void(0)" ng-click="deleteCharacterUndo(character)">Undo?</a>
+        </div>
     </li>
 </ul>
 
