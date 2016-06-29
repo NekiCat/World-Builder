@@ -108,7 +108,6 @@ body {
   width: 650px;
 
   li {
-    height: 80px;
     margin-bottom: 10px;
     position: relative;
 
@@ -116,10 +115,11 @@ body {
 
     &:before {
       border-left: 15px solid transparent;
+      bottom: 0;
       content: "";
-      float: left;
-      height: 100%;
       pointer-events: none;
+      position: absolute;
+      top: 0;
     }
 
     &:hover:before {
@@ -130,6 +130,16 @@ body {
   a {
     color: inherit;
     text-decoration: inherit;
+  }
+
+  .rich-list-item {
+    display: block;
+    height: 50px;
+    padding: 15px 25px;
+  }
+
+  .rich-list-item-label {
+    font-size: 1.4em;
   }
 
   .rich-list-item-delete {
@@ -147,14 +157,16 @@ body {
       color: white;
     }
   }
-}
 
-.project {
-  display: block;
-  height: 50px;
-  padding: 15px 25px;
+  .rich-list-item-removed {
+    padding: 8px 25px;
 
-  .project-name {
-    font-size: 1.4em;
+    a {
+      color: @highlight-color;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }

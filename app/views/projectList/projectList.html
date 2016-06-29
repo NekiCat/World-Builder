@@ -2,11 +2,11 @@
 
 <ul class="centered rich-list">
     <li ng-repeat="project in $storage.projects">
-        <a ng-href="#!/projects/{{project.guid | escape}}" class="project">
+        <a ng-href="#!/projects/{{project.guid | escape}}" class="rich-list-item project">
             <div ng-show="project.icon" class="project-icon">
                 <img ng-src="data:{{project.icon.mime}};base64,{{project.icon.data}}"/>
             </div>
-            <div class="project-name">{{project.name}}</div>
+            <div class="rich-list-item-label project-name">{{project.name}}</div>
         </a>
         <div class="rich-list-item-delete" ng-click="deleteProject(project)"><i class="fa fa-times"></i></div>
     </li>
