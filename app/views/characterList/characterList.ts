@@ -6,6 +6,8 @@ module WorldBuilder {
     export interface CharacterListScope extends ng.IScope {
         $storage: ProjectStorage;
         project: Project;
+        createCharacter: () => void;
+        deleteCharacter: (character: Character) => void;
     }
 
     /**
@@ -20,6 +22,9 @@ module WorldBuilder {
             if (!this.$scope.project) {
                 $location.path("/projects");
             }
+
+            this.$scope.createCharacter = () => Util.insertNameable(this.$scope.project.characters, Character);
+            this.$scope.deleteCharacter = (c) => Util.removeConfirmed(this.$scope.project.characters, c, "Are you sure you want to delete the character '{0}'? This cannot be undone!");
         }
     }
 
