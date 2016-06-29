@@ -25,6 +25,14 @@ module WorldBuilder {
         deleted: boolean;
     }
 
+    export interface ListItem extends Identifiable, Nameable, Deletable { }
+
+    export interface CommonListScope<T extends ListItem> extends ng.IScope {
+        createItem: () => void;
+        removeItem: (item: T) => void;
+        removeUndo: (item: T) => void;
+    }
+
     export interface ProjectStorage extends ng.storage.IStorageService {
         projects: Project[];
     }

@@ -4,12 +4,9 @@ module WorldBuilder {
     /**
      * Interface for the scope of a CharacterListController.
      */
-    export interface CharacterListScope extends ng.IScope {
+    export interface CharacterListScope extends CommonListScope<Character> {
         $storage: ProjectStorage;
         project: Project;
-        createCharacter: () => void;
-        deleteCharacter: (character: Character) => void;
-        deleteCharacterUndo: (character: Character) => void;
     }
 
     /**
@@ -25,9 +22,9 @@ module WorldBuilder {
                 $location.path("/projects");
             }
 
-            this.$scope.createCharacter = () => Util.insertNameable(this.$scope.project.characters, Character);
-            this.$scope.deleteCharacter = (c) => Util.removeStart(this.$scope.project.characters, c);
-            this.$scope.deleteCharacterUndo = (c) => Util.removeUndo(this.$scope.project.characters, c);
+            this.$scope.createItem = () => Util.insertNameable(this.$scope.project.characters, Character);
+            this.$scope.removeItem = (c) => Util.removeStart(this.$scope.project.characters, c);
+            this.$scope.removeUndo = (c) => Util.removeUndo(this.$scope.project.characters, c);
             this.$scope.$on('$locationChangeSuccess', (e: IAngularEvent) => {
                 Util.removeEnd($scope.project.characters);
                 $localStorage.$apply();
