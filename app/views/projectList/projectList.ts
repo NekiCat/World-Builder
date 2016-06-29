@@ -3,10 +3,8 @@ module WorldBuilder {
     /**
      * Interface for the scope of a ProjectController.
      */
-    export interface ProjectListScope extends ng.IScope {
+    export interface ProjectListScope extends CommonListScope<Project> {
         $storage: ProjectStorage;
-        createProject: () => void;
-        deleteProject: (project: Project) => void;
     }
 
     /**
@@ -16,17 +14,14 @@ module WorldBuilder {
         static $inject = ["$scope", "$localStorage"];
 
         constructor(private $scope: ProjectListScope, $localStorage: ng.storage.IStorageService) {
-            this.$scope.$storage = <ProjectStorage>$localStorage.$default({ projects: [] });
-            this.$scope.createProject = () => this.createProject.call(this);
-            this.$scope.deleteProject = (p) => this.deleteProject.call(this, p);
-        }
-
-        public createProject() {
-            Util.insertNameable(this.$scope.$storage.projects, Project);
-        }
-
-        public deleteProject(project: Project) {
-            Util.removeConfirmed(this.$scope.$storage.projects, project, "Do you really want to delete '{0}'? This cannot be undone!");
+            $scope.$storage = <ProjectStorage>$localStorage.$default({ projects: [] });
+            $scope.createItem = () => Util.createNameable($scope.$storage.projects, Project);
+            $scope.removeItem = (p) => Util.removeStart($scope.$storage.projects, p);
+            $scope.removeUndo = (p) => Util.removeUndo($scope.$storage.projects, p);
+            $scope.$on('$locationChangeSuccess', () => {
+                Util.removeEnd($scope.$storage.projects);
+                $localStorage.$apply();
+            });
         }
     }
 

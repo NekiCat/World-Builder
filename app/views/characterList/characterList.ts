@@ -1,6 +1,5 @@
 /// <reference path="../../../typings/index.d.ts"/>
 module WorldBuilder {
-    import IAngularEvent = angular.IAngularEvent;
     /**
      * Interface for the scope of a CharacterListController.
      */
@@ -22,10 +21,10 @@ module WorldBuilder {
                 $location.path("/projects");
             }
 
-            this.$scope.createItem = () => Util.insertNameable(this.$scope.project.characters, Character);
+            this.$scope.createItem = () => Util.createNameable(this.$scope.project.characters, Character);
             this.$scope.removeItem = (c) => Util.removeStart(this.$scope.project.characters, c);
             this.$scope.removeUndo = (c) => Util.removeUndo(this.$scope.project.characters, c);
-            this.$scope.$on('$locationChangeSuccess', (e: IAngularEvent) => {
+            this.$scope.$on('$locationChangeSuccess', () => {
                 Util.removeEnd($scope.project.characters);
                 $localStorage.$apply();
             });

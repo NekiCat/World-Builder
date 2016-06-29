@@ -2,14 +2,20 @@
 
 <ul class="centered rich-list">
     <li ng-repeat="project in $storage.projects">
-        <a ng-href="#!/projects/{{project.guid | escape}}" class="rich-list-item project">
-            <div ng-show="project.icon" class="project-icon">
-                <img ng-src="data:{{project.icon.mime}};base64,{{project.icon.data}}"/>
-            </div>
-            <div class="rich-list-item-label project-name">{{project.name}}</div>
-        </a>
-        <div class="rich-list-item-delete" ng-click="deleteProject(project)"><i class="fa fa-times"></i></div>
+        <div ng-show="!project.deleted">
+            <a ng-href="#!/projects/{{project.guid | escape}}" class="rich-list-item project">
+                <div ng-show="project.icon" class="project-icon">
+                    <img ng-src="data:{{project.icon.mime}};base64,{{project.icon.data}}"/>
+                </div>
+                <div class="rich-list-item-label project-name">{{project.name}}</div>
+            </a>
+            <div class="rich-list-item-delete" ng-click="removeItem(project)"><i class="fa fa-times"></i></div>
+        </div>
+
+        <div ng-show="project.deleted" class="rich-list-item-removed">
+            {{project.name}} was deleted. <a href="javascript:void(0)" ng-click="removeUndo(project)">Undo?</a>
+        </div>
     </li>
 </ul>
 
-<button ng-click="createProject()">New Project</button>
+<button ng-click="createItem()">New Project</button>

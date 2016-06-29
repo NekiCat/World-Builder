@@ -49,25 +49,6 @@ module WorldBuilder {
                 .controller(controllerName, controller);
         }
 
-        export function insertNameable(list: Array<Nameable>, ctr: new() => Nameable) {
-            let item = new ctr();
-            let num = 0;
-            let name = item.name;
-            while (list.filter(i => i.name.toLowerCase() == name.toLowerCase()).length > 0) {
-                name = item.name + " (" + (++num) + ")";
-            }
-
-            item.name = name;
-            list.push(item);
-        }
-
-        export function removeConfirmed(list: Array<Nameable>, item: Nameable, query: string) {
-            let index = list.indexOf(item);
-            if (index > -1 && confirm(query.replace("{0}", item.name))) {
-                list.splice(index, 1);
-            }
-        }
-
         /**
          * Creates a random GUID as identification for this project.
          *

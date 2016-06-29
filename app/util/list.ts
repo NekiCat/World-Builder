@@ -1,4 +1,16 @@
 module WorldBuilder.Util {
+    export function createNameable(list: Array<Nameable>, ctr: new() => Nameable) {
+        let item = new ctr();
+        let num = 0;
+        let name = item.name;
+        while (list.filter(i => i.name.toLowerCase() == name.toLowerCase()).length > 0) {
+            name = item.name + " (" + (++num) + ")";
+        }
+
+        item.name = name;
+        list.push(item);
+    }
+    
     export function removeStart<T extends Deletable>(list: Array<T>, item: T) {
         if (list.indexOf(item) > -1) {
             item.deleted = true;
@@ -15,8 +27,6 @@ module WorldBuilder.Util {
     }
 
     export function removeUndo<T extends Deletable>(list: Array<T>, item: T) {
-        if (item.deleted) {
-            item.deleted = false;
-        }
+        item.deleted = false;
     }
 }
