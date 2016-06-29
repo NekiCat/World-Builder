@@ -97,7 +97,6 @@ module WorldBuilder {
             // http://stackoverflow.com/a/17364716/2346327
             return function (scope, element, attrs) {
                 element.bind("keydown keypress", function (event) {
-                    console.log('keycode = %d', event.which);
                     if (event.which === 13) {
                         scope.$apply(function () {
                             scope.$eval(attrs.wbEnter, {'event': event});
